@@ -12,8 +12,7 @@ public class robot extends OpMode
 
     private DcMotor left = null;
     private DcMotor right = null;
- //hola amiguibis
-
+ 
 
 
 
