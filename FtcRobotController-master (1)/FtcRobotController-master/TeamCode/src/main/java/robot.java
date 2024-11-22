@@ -12,20 +12,34 @@ public class robot extends OpMode
 
     private DcMotor left = null;
     private DcMotor right = null;
+<<<<<<< HEAD:FtcRobotController-master (1)/FtcRobotController-master/TeamCode/src/main/java/robot.java
 
+=======
+    //arm Motor
+    private DcMotor arm1 = null;
+    private DcMotor pulley = null;
+    private Servo gripper = null;
+ 
+>>>>>>> 47e4bd8cf282c4d8ae5e460ba19444df534d2dbb:TeamCode/src/main/java/robot.java
 
 
 
     @Override
     public void init() {
-        left = hardwareMap.get(DcMotor.class,"m1");
-        right = hardwareMap.get(DcMotor.class,"m2");
+        left = hardwareMap.get(DcMotor.class,"left");
+        right = hardwareMap.get(DcMotor.class,"right");
         left.setDirection(DcMotorSimple.Direction.REVERSE);
         right.setDirection(DcMotorSimple.Direction.FORWARD);
         left.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         right.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        //arm configuration
+        arm1 = hardwareMap.get(DcMotor.class,"arm");
+        arm1.setDirection(DcMotorSimple.Direction.REVERSE); // Change for robot
+
+        pulley = hardwareMap.get(DcMotor.class, "poll"); // change name real
+        pulley.setDirection(DcMotorSimple.Direction.FORWARD); // Change for robot
+
+
 
 
     }
@@ -49,6 +63,22 @@ public class robot extends OpMode
         right.setPower(Z);
 
         //arm subsystem Test
+        if (gamepad1.a)
+            arm1.setPower(0);
+        else if (gamepad1.b)
+            arm1.setPower(.5);
+        else if(gamepad1.y)
+            arm1.setPower(-.5)
+
+        double  y = gamepad1.right.trigger;
+        double old = gamepad1.left.trigger;
+
+
+        pulley.setPower(y -old);
+
+
+
+
 
 
 
