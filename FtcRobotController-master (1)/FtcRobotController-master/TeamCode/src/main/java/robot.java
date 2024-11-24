@@ -15,11 +15,10 @@ public class robot extends CommandOpMode
 {
 
     private MotorEx right,left;
-    private double wheel_diameter = 4;
+    private final  double wheel_diameter = 4;
 
-    private powertrain drivetrain = new powertrain(right,left,wheel_diameter);
-    private GamepadEx ps4 = new GamepadEx(gamepad1);
-    private drive drivecomand;
+    private final powertrain drivetrain = new powertrain(right,left,wheel_diameter);
+    private final GamepadEx ps4 = new GamepadEx(gamepad1);
 
 
     @Override
@@ -27,7 +26,10 @@ public class robot extends CommandOpMode
       right = new MotorEx(hardwareMap, "right");
       left = new MotorEx(hardwareMap, "left");
 
-      drivecomand = new drive(drivetrain, ()-> ps4.getLeftY(), ()-> ps4.getRightX());
+        drive drivecomand = new drive(drivetrain
+                , ps4::getLeftY
+                , ps4::getRightX
+        );
 
       drivetrain.setDefaultCommand(drivecomand);
 
