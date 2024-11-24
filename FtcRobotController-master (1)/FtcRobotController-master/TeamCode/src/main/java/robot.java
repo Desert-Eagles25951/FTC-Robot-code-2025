@@ -19,8 +19,7 @@ import java.util.function.DoubleSupplier;
 public class robot extends OpMode
 {
    private final powertrain drivetrain = new powertrain();
-    DoubleSupplier speed, turn;
-    private final drive drive = new drive(drivetrain ,  speed,  turn);
+
     public GamepadEx ps4 = new GamepadEx(gamepad1);
 
 
