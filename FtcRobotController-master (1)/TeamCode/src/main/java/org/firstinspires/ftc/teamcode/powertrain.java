@@ -28,8 +28,8 @@ public class powertrain extends SubsystemBase {
 
    public powertrain(HardwareMap hardwareMap){
 
-       right = new Motor(hardwareMap, "right");
-       left = new Motor(hardwareMap, "left");
+       right = new Motor(hardwareMap, "mright");
+       left = new Motor(hardwareMap, "mleft");
 
        right.setZeroPowerBehavior(Motor.ZeroPowerBehavior.BRAKE);
        left.setZeroPowerBehavior(Motor.ZeroPowerBehavior.BRAKE);
@@ -43,13 +43,15 @@ public class powertrain extends SubsystemBase {
 
    public void inputcontrol(GamepadEx ps4){
      speed = ps4.getLeftY();
-     turn = ps4.getRightX();
+     turn = -ps4.getRightX();
    }
 
 
    public void arcade(){
        drive.arcadeDrive(speed , turn);
    }
+
+   
 
 
 
