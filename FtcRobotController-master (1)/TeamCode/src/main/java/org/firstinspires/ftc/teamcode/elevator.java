@@ -67,15 +67,18 @@ public class elevator extends SubsystemBase {
     }
 
     public void higBasquet(){
-        controlELvator.setSetPoint(0);//FIXME
+        controlELvator.setSetPoint(2900);//FIXME
     }
 
     public void lowBasquet(){
-        controlELvator.setSetPoint(0); //FIXME
+        controlELvator.setSetPoint(1400); //FIXME
     }
 
     public void higChamber(){
-        controlELvator.setSetPoint(0); //FIXME
+        controlELvator.setSetPoint(1300); //FIXME
+    }
+    public void Change(){
+        controlELvator.setSetPoint(950);
     }
     public void lowChamber(){
         controlELvator.setSetPoint(0); //FIXME

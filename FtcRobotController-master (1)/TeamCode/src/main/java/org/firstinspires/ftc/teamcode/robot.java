@@ -16,12 +16,13 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 
+import java.sql.Time;
 import java.util.Collections;
 import java.util.Set;
 import java.util.Timer;
 
 
-@TeleOp(name = " tlaxcala")
+@TeleOp(name = " Telop")
 public class robot extends OpMode
 {
   public GamepadEx ps4;
@@ -29,11 +30,11 @@ public class robot extends OpMode
   private  elevator elevator;
   private  arm_Gripper Arm;
 
-  //rutines
-  private RutineTakePIece Takepiece;
 
-  //Botons
-    Button A,B,Y,X;
+  //rutines
+
+
+  ElapsedTime timer = new ElapsedTime();
 
 
 
@@ -47,13 +48,9 @@ public class robot extends OpMode
 
             //Botons
 
-            A = new GamepadButton(ps4 ,GamepadKeys.Button.A);
-            B = new GamepadButton(ps4, GamepadKeys.Button.B);
-            Y = new GamepadButton(ps4, GamepadKeys.Button.Y);
-            X = new GamepadButton(ps4, GamepadKeys.Button.X);
 
-            //rutines
-            Takepiece = new RutineTakePIece(Arm);
+
+
         }
 
 
@@ -68,7 +65,7 @@ public class robot extends OpMode
 
         @Override
         public void start() {
-            Arm.armOffset();
+
 
         }
 
@@ -82,22 +79,73 @@ public class robot extends OpMode
 
 
             //controls
-
-            //climber
-            A.whenPressed( new InstantCommand(()->
-            {
+            // climber boton A, right bumper Take piece,
+            if(ps4.wasJustPressed(GamepadKeys.Button.A)){
                 elevator.climber();
 
-            })).whenReleased(new InstantCommand(()->
-            {
+            }
+                else if(ps4.wasJustReleased(GamepadKeys.Button.A)){
                 elevator.offsetPOs();
-            }));
-
-            B.whenPressed(new InstantCommand(()->{
+            }
+            if(ps4.wasJustPressed(GamepadKeys.Button.RIGHT_BUMPER)){
                 Arm.TakePiece();
                 Arm.OpenGripper();
-            })).whenReleased(Takepiece);
+
+            }
+            else if (ps4.wasJustReleased(GamepadKeys.Button.RIGHT_BUMPER)) {
+
+                Arm.Gripperoffset();
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                Arm.armOfseTake();
+
+            }
 
 
-    }}
+            if(ps4.wasJustPressed(GamepadKeys.Button.X)){
+                Arm.OutPieceBasket();
+                elevator.lowBasquet();
+
+            }
+            else if( ps4.wasJustReleased(GamepadKeys.Button.X)){
+                Arm.OpenGripper();
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+
+                Arm.ArmOfsetBasket();
+                elevator.offsetPOs();
+            }
+            if (ps4.wasJustPressed(GamepadKeys.Button.LEFT_BUMPER)){
+                Arm.OpenGripper();
+
+            }
+            else if (ps4.wasJustReleased(GamepadKeys.Button.LEFT_BUMPER)){
+                Arm.Gripperoffset();
+            }
+
+            /*if(ps4.wasJustPressed(GamepadKeys.Button.Y)){
+                Arm.OutPieceBasket();
+                elevator.higBasquet();
+
+            }
+            else if( ps4.wasJustReleased(GamepadKeys.Button.Y)){
+                Arm.OpenGripper();
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                Arm.Gripperoffset();
+                Arm.armOFFset();
+                elevator.offsetPOs();
+            }*/
+
+
+        }}
 

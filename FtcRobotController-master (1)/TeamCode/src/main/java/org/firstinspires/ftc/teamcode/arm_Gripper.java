@@ -3,45 +3,142 @@ package org.firstinspires.ftc.teamcode;
 import com.arcrobotics.ftclib.command.SubsystemBase;
 import com.arcrobotics.ftclib.hardware.ServoEx;
 import com.arcrobotics.ftclib.hardware.SimpleServo;
+import com.qualcomm.robotcore.hardware.CRServo;
+import com.qualcomm.robotcore.hardware.CRServoImpl;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.ServoController;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
 public class arm_Gripper extends SubsystemBase  {
-    private ServoEx arm1,arm2,gripper;
+    private ServoEx gripper;
+
+    private ServoEx arm1, arm2;
+
+    private ServoController ARM1, ARM2;
 
     public  arm_Gripper(HardwareMap harmap){
 
-        arm1 = new SimpleServo(harmap, "rightarm", 0,120, AngleUnit.DEGREES);
-        arm2 = new SimpleServo(harmap, "leftarm", 0, 120, AngleUnit.DEGREES);
-
-        gripper = new SimpleServo(harmap, "gripper",0 ,180, AngleUnit.DEGREES );
 
 
+        gripper = new SimpleServo(harmap, "gripper",-180 ,180, AngleUnit.DEGREES );
 
+        arm1 = new SimpleServo(harmap, "arm1", 0,180);
+        arm2 = new SimpleServo(harmap, "arm2", 0,180);
+
+        ARM1 = harmap.get(Servo.class,"arm1" ).getController();
+        ARM2 = harmap.get(Servo.class, "arm2").getController();
+
+
+        arm2.setInverted(false);
+        arm1.setInverted(true);
+
+        gripper.setInverted(false);
     }
 
-    public void armOffset(){
-        arm1.turnToAngle(0);
-        arm2.turnToAngle(0);
+    public void armOfseTake(){
+        ARM1.pwmEnable();
+        ARM2.pwmEnable();
+        try {
+            Thread.sleep(200);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        for(int pos = 92; pos > 0; pos -= 1){
+            arm1.turnToAngle(pos);
+            arm2.turnToAngle(pos);
+        }
+        try {
+            Thread.sleep(1100);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        ARM1.pwmDisable();
+        ARM2.pwmDisable();
     }
+    public void ArmOfsetBasket(){
+        ARM1.pwmEnable();
+        ARM2.pwmEnable();
+        try {
+            Thread.sleep(200);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        for(int pos = 35; pos > 0  ; pos -= 1){
+            arm1.turnToAngle(pos);
+            arm2.turnToAngle(pos);
+
+        }
+
+        try {
+            Thread.sleep(200);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        ARM1.pwmDisable();
+        ARM2.pwmDisable();
+    }
+
+    public void ArmOfsetChamber(){
+        for(int pos = 35; pos > -25; pos -= 1){
+            arm1.turnToAngle(pos);
+            arm2.turnToAngle(pos);
+
+        }
+    }
+
+
+
 
     public void Gripperoffset(){
-        gripper.turnToAngle(0);
+        gripper.turnToAngle(-40);
     }
 
     public void OpenGripper(){
-        gripper.turnToAngle(120);
+        gripper.turnToAngle(15);
     }
 
     public void TakePiece(){
-        arm1.turnToAngle(120);
-        arm2.turnToAngle(-120);
+        try {
+            Thread.sleep(200);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        ARM1.pwmEnable();
+        ARM2.pwmEnable();
+     for(int pos = 0; pos < 92; pos += 1){
+         arm1.turnToAngle(pos);
+         arm2.turnToAngle(pos);
+
+     }
+        try {
+            Thread.sleep(700);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        ARM1.pwmDisable();
+        ARM2.pwmDisable();
+    }
+
+    public void OutPieceBasket(){
+
+        for(int pos = 0; pos < 35; pos += 1){
+            arm1.turnToAngle(pos);
+            arm2.turnToAngle(pos);
+
+        }
+
     }
 
     public void OutPiece(){
-        arm1.turnToAngle(50);
-        arm2.turnToAngle(-50);
+        for(int pos = 0; pos < 30; pos += 1){
+            arm1.turnToAngle(pos);
+            arm2.turnToAngle(pos);
+
+        }
     }
 
 

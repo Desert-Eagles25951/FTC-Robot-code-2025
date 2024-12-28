@@ -5,6 +5,7 @@ import com.arcrobotics.ftclib.command.Command;
 import com.arcrobotics.ftclib.command.SubsystemBase;
 import com.arcrobotics.ftclib.drivebase.DifferentialDrive;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
+import com.arcrobotics.ftclib.gamepad.GamepadKeys;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.arcrobotics.ftclib.hardware.motors.MotorEx;
 import com.arcrobotics.ftclib.hardware.motors.Motor.Encoder;
@@ -31,8 +32,8 @@ public class powertrain extends SubsystemBase {
        right = new Motor(hardwareMap, "mright");
        left = new Motor(hardwareMap, "mleft");
 
-       right.setZeroPowerBehavior(Motor.ZeroPowerBehavior.BRAKE);
-       left.setZeroPowerBehavior(Motor.ZeroPowerBehavior.BRAKE);
+       right.setZeroPowerBehavior(Motor.ZeroPowerBehavior.FLOAT);
+       left.setZeroPowerBehavior(Motor.ZeroPowerBehavior.FLOAT);
 
         drive = new DifferentialDrive(right, left);
 
@@ -42,8 +43,8 @@ public class powertrain extends SubsystemBase {
 
 
    public void inputcontrol(GamepadEx ps4){
-     speed = ps4.getLeftY();
-     turn = -ps4.getRightX();
+     speed =  ps4.getTrigger(GamepadKeys.Trigger.LEFT_TRIGGER) -ps4.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER) ;
+     turn = -ps4.getLeftX();
    }
 
 
