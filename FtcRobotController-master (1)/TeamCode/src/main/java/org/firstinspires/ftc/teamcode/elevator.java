@@ -78,7 +78,7 @@ public class elevator extends SubsystemBase {
         controlELvator.setSetPoint(1300); //FIXME
     }
     public void Change(){
-        controlELvator.setSetPoint(950);
+        controlELvator.setSetPoint(800);
     }
     public void lowChamber(){
         controlELvator.setSetPoint(0); //FIXME
@@ -105,6 +105,10 @@ public class elevator extends SubsystemBase {
         }
 
         elevator.set(finalMove);
+    }
+
+    public double elevatorPos(){
+        return controlELvator.getSetPoint();
     }
 
 }

@@ -13,8 +13,11 @@ import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.gamepad.GamepadKeys;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 import java.sql.Time;
 import java.util.Collections;
@@ -46,7 +49,6 @@ public class robot extends OpMode
             elevator = new elevator(hardwareMap);
             Arm = new arm_Gripper(hardwareMap);
 
-            //Botons
 
 
 
@@ -72,10 +74,13 @@ public class robot extends OpMode
         @Override
         public void loop() {
 
+           telemetry.addData("angle", "angle (%.2f) ", Arm.getangleArm());
+           telemetry.addData("elevator encode", "elevator (%.2f)", elevator.elevatorPos());
             ps4.readButtons();
             drivetrain.inputcontrol(ps4);
             drivetrain.arcade();
             elevator.loop();
+            Arm.getangleArm();
 
 
             //controls
@@ -129,23 +134,34 @@ public class robot extends OpMode
                 Arm.Gripperoffset();
             }
 
-            /*if(ps4.wasJustPressed(GamepadKeys.Button.Y)){
-                Arm.OutPieceBasket();
-                elevator.higBasquet();
+            if(ps4.wasJustPressed(GamepadKeys.Button.Y)){
+
+                elevator.higChamber();
+                Arm.OutPiece();
 
             }
-            else if( ps4.wasJustReleased(GamepadKeys.Button.Y)){
+            else if(ps4.wasJustReleased(GamepadKeys.Button.Y)){
+
+                elevator.Change();
+
+
+
+
+            }
+            if(ps4.wasJustPressed(GamepadKeys.Button.B)){
+
                 Arm.OpenGripper();
-                try {
-                    Thread.sleep(500);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-                Arm.Gripperoffset();
-                Arm.armOFFset();
+                Arm.ArmOfsetChamber();
                 elevator.offsetPOs();
-            }*/
+            }
+            if(ps4.wasJustPressed(GamepadKeys.Button.DPAD_RIGHT)){
 
 
-        }}
+
+            }
+
+            }
+        }
+
+
 

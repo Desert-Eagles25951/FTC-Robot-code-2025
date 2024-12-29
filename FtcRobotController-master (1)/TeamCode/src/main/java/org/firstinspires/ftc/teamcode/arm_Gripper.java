@@ -83,11 +83,21 @@ public class arm_Gripper extends SubsystemBase  {
     }
 
     public void ArmOfsetChamber(){
-        for(int pos = 35; pos > -25; pos -= 1){
+        ARM1.pwmEnable();
+        ARM2.pwmEnable();
+        try {
+            Thread.sleep(200);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        for(int pos = 35; pos > 0; pos -= 1){
             arm1.turnToAngle(pos);
             arm2.turnToAngle(pos);
 
         }
+        ARM1.pwmDisable();
+        ARM2.pwmDisable();
     }
 
 
@@ -98,7 +108,7 @@ public class arm_Gripper extends SubsystemBase  {
     }
 
     public void OpenGripper(){
-        gripper.turnToAngle(15);
+        gripper.turnToAngle(23);
     }
 
     public void TakePiece(){
@@ -140,6 +150,11 @@ public class arm_Gripper extends SubsystemBase  {
 
         }
     }
+    public double getangleArm(){
+        return gripper.getAngle(AngleUnit.DEGREES);
+    }
+
+
 
 
 
