@@ -130,9 +130,7 @@ public class robot extends OpMode
                 Arm.OpenGripper();
 
             }
-            else if (ps4.wasJustReleased(GamepadKeys.Button.LEFT_BUMPER)){
-                Arm.Gripperoffset();
-            }
+
 
             if(ps4.wasJustPressed(GamepadKeys.Button.Y)){
 
@@ -141,12 +139,7 @@ public class robot extends OpMode
 
             }
             else if(ps4.wasJustReleased(GamepadKeys.Button.Y)){
-
                 elevator.Change();
-
-
-
-
             }
             if(ps4.wasJustPressed(GamepadKeys.Button.B)){
 
@@ -154,11 +147,7 @@ public class robot extends OpMode
                 Arm.ArmOfsetChamber();
                 elevator.offsetPOs();
             }
-            if(ps4.wasJustPressed(GamepadKeys.Button.DPAD_RIGHT)){
 
-
-
-            }
 
             }
         }
