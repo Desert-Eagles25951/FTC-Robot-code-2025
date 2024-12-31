@@ -136,10 +136,12 @@ public class robot extends OpMode
 
                 elevator.higChamber();
                 Arm.OutPiece();
+                Arm.Gripperoffset();
 
             }
             else if(ps4.wasJustReleased(GamepadKeys.Button.Y)){
                 elevator.Change();
+                Arm.Gripperoffset();
             }
             if(ps4.wasJustPressed(GamepadKeys.Button.B)){
 

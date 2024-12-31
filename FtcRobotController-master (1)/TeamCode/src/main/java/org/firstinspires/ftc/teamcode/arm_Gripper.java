@@ -45,7 +45,7 @@ public class arm_Gripper extends SubsystemBase  {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        for(int pos = 92; pos > 0; pos -= 1){
+        for(int pos = 112; pos > 0; pos -= 1){
             arm1.turnToAngle(pos);
             arm2.turnToAngle(pos);
         }
@@ -91,7 +91,7 @@ public class arm_Gripper extends SubsystemBase  {
             throw new RuntimeException(e);
         }
 
-        for(int pos = 35; pos > 0; pos -= 1){
+        for(int pos = 40; pos > 0; pos -= 1){
             arm1.turnToAngle(pos);
             arm2.turnToAngle(pos);
 
@@ -104,7 +104,7 @@ public class arm_Gripper extends SubsystemBase  {
 
 
     public void Gripperoffset(){
-        gripper.turnToAngle(-40);
+        gripper.turnToAngle(-43);
     }
 
     public void OpenGripper(){
@@ -119,23 +119,18 @@ public class arm_Gripper extends SubsystemBase  {
         }
         ARM1.pwmEnable();
         ARM2.pwmEnable();
-     for(int pos = 0; pos < 92; pos += 1){
+     for(int pos = 0; pos < 112; pos += 1){
          arm1.turnToAngle(pos);
          arm2.turnToAngle(pos);
 
      }
-        try {
-            Thread.sleep(700);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        ARM1.pwmDisable();
-        ARM2.pwmDisable();
+
+
     }
 
     public void OutPieceBasket(){
 
-        for(int pos = 0; pos < 35; pos += 1){
+        for(int pos = 0; pos < 40; pos += 1){
             arm1.turnToAngle(pos);
             arm2.turnToAngle(pos);
 
@@ -144,7 +139,7 @@ public class arm_Gripper extends SubsystemBase  {
     }
 
     public void OutPiece(){
-        for(int pos = 0; pos < 30; pos += 1){
+        for(int pos = 0; pos < 35; pos += 1){
             arm1.turnToAngle(pos);
             arm2.turnToAngle(pos);
 
