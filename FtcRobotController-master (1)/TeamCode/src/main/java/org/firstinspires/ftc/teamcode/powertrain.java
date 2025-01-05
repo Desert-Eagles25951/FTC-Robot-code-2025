@@ -6,6 +6,8 @@ import com.arcrobotics.ftclib.command.SubsystemBase;
 import com.arcrobotics.ftclib.drivebase.DifferentialDrive;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.gamepad.GamepadKeys;
+import com.arcrobotics.ftclib.hardware.GyroEx;
+import com.arcrobotics.ftclib.hardware.RevIMU;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.arcrobotics.ftclib.hardware.motors.MotorEx;
 import com.arcrobotics.ftclib.hardware.motors.Motor.Encoder;
@@ -22,12 +24,16 @@ public class powertrain extends SubsystemBase {
    private Motor right = null;
    private Motor left = null;
 
+
+
    DifferentialDrive drive = null;
 
    double speed;
    double turn;
 
    public powertrain(HardwareMap hardwareMap){
+
+
 
        right = new Motor(hardwareMap, "mright");
        left = new Motor(hardwareMap, "mleft");

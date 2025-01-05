@@ -110,5 +110,8 @@ public class elevator extends SubsystemBase {
     public double elevatorPos(){
         return controlELvator.getSetPoint();
     }
+    public double elevator_leftMotor(){
+        return  m2.getCurrentPosition();
+    }
 
 }

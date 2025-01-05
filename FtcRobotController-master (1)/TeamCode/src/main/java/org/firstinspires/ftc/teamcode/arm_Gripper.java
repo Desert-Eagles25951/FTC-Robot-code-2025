@@ -45,7 +45,7 @@ public class arm_Gripper extends SubsystemBase  {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        for(int pos = 113; pos > 0; pos -= 1){
+        for(int pos = 115; pos > 0; pos -= 1){
             arm1.turnToAngle(pos);
             arm2.turnToAngle(pos);
         }
@@ -104,7 +104,7 @@ public class arm_Gripper extends SubsystemBase  {
 
 
     public void Gripperoffset(){
-        gripper.turnToAngle(-43);
+        gripper.turnToAngle(-45);
     }
 
     public void OpenGripper(){
@@ -119,7 +119,7 @@ public class arm_Gripper extends SubsystemBase  {
         }
         ARM1.pwmEnable();
         ARM2.pwmEnable();
-     for(int pos = 0; pos < 113; pos += 1){
+     for(int pos = 0; pos < 115; pos += 1){
          arm1.turnToAngle(pos);
          arm2.turnToAngle(pos);
 

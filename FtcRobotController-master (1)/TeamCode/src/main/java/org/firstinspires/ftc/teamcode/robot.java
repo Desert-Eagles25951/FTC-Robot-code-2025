@@ -76,6 +76,7 @@ public class robot extends OpMode
 
            telemetry.addData("angle", "angle (%.2f) ", Arm.getangleArm());
            telemetry.addData("elevator encode", "elevator (%.2f)", elevator.elevatorPos());
+           telemetry.addData("right2", "rightElevator (%.2f)", elevator.elevator_leftMotor());
             ps4.readButtons();
             drivetrain.inputcontrol(ps4);
             drivetrain.arcade();
