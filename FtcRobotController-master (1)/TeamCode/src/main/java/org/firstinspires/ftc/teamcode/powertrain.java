@@ -56,6 +56,8 @@ public class powertrain extends SubsystemBase {
 
    public void arcade(){
        drive.arcadeDrive(speed , turn);
+
+
    }
 
    
