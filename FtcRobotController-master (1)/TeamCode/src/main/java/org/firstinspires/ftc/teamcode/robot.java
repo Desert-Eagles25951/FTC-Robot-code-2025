@@ -101,11 +101,6 @@ public class robot extends OpMode
             else if (ps4.wasJustReleased(GamepadKeys.Button.RIGHT_BUMPER)) {
 
                 Arm.Gripperoffset();
-                try {
-                    Thread.sleep(500);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
                 Arm.armOfseTake();
 
             }

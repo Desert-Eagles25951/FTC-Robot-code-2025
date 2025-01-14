@@ -43,7 +43,8 @@ public class powertrain extends SubsystemBase {
 
         drive = new DifferentialDrive(right, left);
 
-
+        right.resetEncoder();
+        left.resetEncoder();
 
    }
 
@@ -52,6 +53,8 @@ public class powertrain extends SubsystemBase {
      speed =  ps4.getTrigger(GamepadKeys.Trigger.LEFT_TRIGGER) -ps4.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER) ;
      turn = -ps4.getLeftX();
    }
+
+
 
 
    public void arcade(){
